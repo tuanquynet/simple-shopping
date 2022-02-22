@@ -7,4 +7,7 @@ export MONGO_PORT=27017
 export MONGO_USER=admin
 export MONGO_PASS=admin123
 
+export RABBITMQ_DEFAULT_PASS=admin
+
+
 docker-compose -f ./docker-compose.yml up -d

@@ -7,6 +7,8 @@ export MONGO_PORT=27017
 export MONGO_USER=admin
 export MONGO_PASS=admin123
 
+export RABBITMQ_DEFAULT_PASS=admin
+
 docker stop simple-shopping_rabbitmq_1
 docker rm simple-shopping_rabbitmq_1
 

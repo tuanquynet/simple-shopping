@@ -12,13 +12,11 @@ services:
       - "5672:5672"
       - "5671:5671"
     expose:
-      - "1883"
-      - "8883"
       - "15672"
       - "5672"
       - "5671"
     environment:
-      - CONFIG_USE_ECC
+      CONFIG_USE_ECC: ""
     volumes:
       - "rabbitmq-data:/var/lib/rabbitmq"
 
