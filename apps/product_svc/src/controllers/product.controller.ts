@@ -4,22 +4,18 @@ import {
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
-  put,
-  del,
-  requestBody,
-  response,
+  del, get,
+  getModelSchemaRef, param, patch, post, put, requestBody,
+  response
 } from '@loopback/rest';
 import {Product} from '../models';
 import {ProductRepository} from '../repositories';
 
+
+const MAX_RECORDS = 100
 export class ProductController {
   constructor(
     @repository(ProductRepository)
@@ -73,7 +69,12 @@ export class ProductController {
   async find(
     @param.filter(Product) filter?: Filter<Product>,
   ): Promise<Product[]> {
-    return this.productRepository.find(filter);
+    const limit = filter?.limit;
+
+    return this.productRepository.find({
+      ...filter,
+      limit: Math.min(limit ?? 0, MAX_RECORDS),
+    });
   }
 
   @patch('/products')
