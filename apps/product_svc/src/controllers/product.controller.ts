@@ -43,9 +43,6 @@ export class ProductController {
     })
     product: Omit<Product, 'id'>,
   ): Promise<Product> {
-    console.log(typeof this.request.body);
-    console.log(this.request.body);
-
     return this.productRepository.create(product);
   }
 
