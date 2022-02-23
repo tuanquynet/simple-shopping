@@ -1,6 +1,6 @@
 import {inject} from '@loopback/core';
 import {
-  get, param, response
+  get, param, Request, response, RestBindings
 } from '@loopback/rest';
 import {
   RabbitmqBindings,
@@ -12,7 +12,8 @@ import {
 export class RabbitController {
   constructor(
     @inject(RabbitmqBindings.RABBITMQ_PRODUCER)
-    private rabbitmqProducer: RabbitmqProducer
+    private rabbitmqProducer: RabbitmqProducer,
+    @inject(RestBindings.Http.REQUEST) private request: Request,
   ) {
     console.log('construct RabbitController');
   }
@@ -36,9 +37,30 @@ export class RabbitController {
     return {
       greeting: 'test rabbitmq',
       date: new Date(),
-      // url: this.req.url,
-      // headers: Object.assign({}, this.req.headers),
     };
+  }
+
+  @get('/log-access')
+  @response(200, {
+    description: 'log-access',
+  })
+  async logAccess(
+  ) {
+    const messageData = {
+      serviceName: 'product_svc',
+      createdAt: new Date(),
+      url: this.request.url,
+      method: this.request.method,
+      payload: {done: true},
+    }
+    await this.rabbitmqProducer.publish(
+      'messaging.direct',
+      'access-log',
+      Buffer.from(JSON.stringify(messageData)),
+    );
+
+    // Reply with a greeting, the current time, the url, and request headers
+    return messageData;
   }
 
 }

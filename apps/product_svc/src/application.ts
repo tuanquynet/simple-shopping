@@ -1,5 +1,5 @@
 import {BootMixin} from '@loopback/boot';
-import {ApplicationConfig} from '@loopback/core';
+import {ApplicationConfig, createBindingFromClass} from '@loopback/core';
 import {RepositoryMixin} from '@loopback/repository';
 import {RestApplication} from '@loopback/rest';
 import {
@@ -13,6 +13,7 @@ import {
   RabbitmqComponentConfig
 } from 'loopback-rabbitmq';
 import path from 'path';
+import {AccessLoggerHandlerMiddlewareProvider} from './middlewares';
 import {MySequence} from './sequence';
 
 
@@ -24,6 +25,8 @@ export class ProductSvcApplication extends BootMixin(
 ) {
   constructor(options: ApplicationConfig = {}) {
     super(options);
+    // add middleware
+    this.add(createBindingFromClass(AccessLoggerHandlerMiddlewareProvider));
 
     // Set up the custom sequence
     this.sequence(MySequence);
@@ -36,13 +39,6 @@ export class ProductSvcApplication extends BootMixin(
       path: '/explorer',
     });
     this.component(RestExplorerComponent);
-
-    console.log(
-      'process.env.RABBITMQ_PROTOCOL',
-      process.env.RABBITMQ_PROTOCOL,
-      process.env.RABBITMQ_USER,
-      process.env.RABBITMQ_PASS,
-    );
 
     this.configure<RabbitmqComponentConfig>(RabbitmqBindings.COMPONENT).to({
       options: {
