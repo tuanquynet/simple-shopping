@@ -8,8 +8,8 @@ import {RabbitmqBindings, RabbitmqProducer} from 'loopback-rabbitmq';
 @injectable(
   asMiddleware({
     group: 'logger',
-    upstreamGroups: RestMiddlewareGroups.SEND_RESPONSE,
-    downstreamGroups: RestMiddlewareGroups.CORS,
+    upstreamGroups: RestMiddlewareGroups.PARSE_PARAMS,
+    downstreamGroups: RestMiddlewareGroups.INVOKE_METHOD,
   }),
 )
 export class AccessLoggerHandlerMiddlewareProvider implements Provider<Middleware> {
@@ -25,9 +25,7 @@ export class AccessLoggerHandlerMiddlewareProvider implements Provider<Middlewar
     ) => {
       const {request} = ctx;
       try {
-        console.log('request.body');
-        console.log(request.body);
-        console.log('===========');
+        console.log('AccessLoggerHandlerMiddlewareProvider');
         const messageData = {
           serviceName: 'product_svc',
           createdAt: new Date(),
