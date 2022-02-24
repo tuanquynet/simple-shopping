@@ -1,5 +1,9 @@
 import {Getter, inject} from '@loopback/core';
-import {BelongsToAccessor, DefaultCrudRepository, repository} from '@loopback/repository';
+import {
+  BelongsToAccessor,
+  DefaultCrudRepository,
+  repository,
+} from '@loopback/repository';
 import {BranchRepository} from '.';
 import {MongodbDataSource} from '../datasources';
 import {Branch, Category, Product, ProductRelations} from '../models';

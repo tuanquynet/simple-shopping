@@ -4,19 +4,20 @@ import {RepositoryMixin} from '@loopback/repository';
 import {RestApplication} from '@loopback/rest';
 import {
   RestExplorerBindings,
-  RestExplorerComponent
+  RestExplorerComponent,
 } from '@loopback/rest-explorer';
 import {ServiceMixin} from '@loopback/service-proxy';
 import {
-  ConsumersBooter, MessageHandlerErrorBehavior, QueueComponent, RabbitmqBindings,
+  ConsumersBooter,
+  MessageHandlerErrorBehavior,
+  QueueComponent,
+  RabbitmqBindings,
   RabbitmqComponent,
-  RabbitmqComponentConfig
+  RabbitmqComponentConfig,
 } from 'loopback-rabbitmq';
 import path from 'path';
 import {AccessLoggerHandlerMiddlewareProvider} from './middlewares';
 import {MySequence} from './sequence';
-
-
 
 export {ApplicationConfig};
 

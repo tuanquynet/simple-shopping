@@ -3,11 +3,11 @@ import {ConsumeMessage, rabbitConsume} from 'loopback-rabbitmq';
 interface Message {
   action: string;
   tenantId?: number;
-  payload: any;
+  payload: object;
 }
 
 export class WebhooksConsumer {
-  constructor(){
+  constructor() {
     console.log('WebhooksConsumer');
   }
 

@@ -1,7 +1,10 @@
 import {inject} from '@loopback/core';
 import {
-  post, Request, response,
-  ResponseObject, RestBindings
+  post,
+  Request,
+  response,
+  ResponseObject,
+  RestBindings,
 } from '@loopback/rest';
 
 /**
@@ -31,6 +34,6 @@ export class DebugController {
   @post('/throw')
   @response(200, DEBUG_RESPONSE)
   throwException() {
-    throw new Error('Unknown error')
+    throw new Error('Unknown error');
   }
 }

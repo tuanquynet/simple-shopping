@@ -1,7 +1,11 @@
 import {inject, injectable, Next, Provider} from '@loopback/core';
 import {
   asMiddleware,
-  HttpErrors, Middleware, MiddlewareContext, Response, RestMiddlewareGroups
+  HttpErrors,
+  Middleware,
+  MiddlewareContext,
+  Response,
+  RestMiddlewareGroups,
 } from '@loopback/rest';
 import {RabbitmqBindings, RabbitmqProducer} from 'loopback-rabbitmq';
 
@@ -12,10 +16,12 @@ import {RabbitmqBindings, RabbitmqProducer} from 'loopback-rabbitmq';
     downstreamGroups: RestMiddlewareGroups.INVOKE_METHOD,
   }),
 )
-export class AccessLoggerHandlerMiddlewareProvider implements Provider<Middleware> {
+export class AccessLoggerHandlerMiddlewareProvider
+  implements Provider<Middleware>
+{
   constructor(
     @inject(RabbitmqBindings.RABBITMQ_PRODUCER)
-    private rabbitmqProducer: RabbitmqProducer
+    private rabbitmqProducer: RabbitmqProducer,
   ) {}
 
   async value() {
@@ -32,7 +38,7 @@ export class AccessLoggerHandlerMiddlewareProvider implements Provider<Middlewar
           url: request.url,
           method: request.method,
           payload: request.body ?? null,
-        }
+        };
         await this.rabbitmqProducer.publish(
           'messaging.direct',
           'access-log',

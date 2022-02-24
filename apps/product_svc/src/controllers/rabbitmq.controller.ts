@@ -1,13 +1,6 @@
 import {inject} from '@loopback/core';
-import {
-  get, param, Request, response, RestBindings
-} from '@loopback/rest';
-import {
-  RabbitmqBindings,
-  RabbitmqProducer
-} from 'loopback-rabbitmq';
-
-
+import {get, param, Request, response, RestBindings} from '@loopback/rest';
+import {RabbitmqBindings, RabbitmqProducer} from 'loopback-rabbitmq';
 
 export class RabbitController {
   constructor(
@@ -26,11 +19,12 @@ export class RabbitController {
     @param.query.string('exchange', {required: false}) exchange?: string,
     @param.query.string('routingKey', {required: false}) routingKey?: string,
   ) {
-
     await this.rabbitmqProducer.publish(
       exchange ?? 'messaging.direct',
       routingKey ?? 'tenant.webhook',
-      Buffer.from(JSON.stringify({name: 'loopback-rabbitmq-example', date: new Date()})),
+      Buffer.from(
+        JSON.stringify({name: 'loopback-rabbitmq-example', date: new Date()}),
+      ),
     );
 
     // Reply with a greeting, the current time, the url, and request headers
@@ -44,15 +38,14 @@ export class RabbitController {
   @response(200, {
     description: 'log-access',
   })
-  async logAccess(
-  ) {
+  async logAccess() {
     const messageData = {
       serviceName: 'product_svc',
       createdAt: new Date(),
       url: this.request.url,
       method: this.request.method,
       payload: {done: true},
-    }
+    };
     await this.rabbitmqProducer.publish(
       'messaging.direct',
       'access-log',
@@ -62,5 +55,4 @@ export class RabbitController {
     // Reply with a greeting, the current time, the url, and request headers
     return messageData;
   }
-
 }

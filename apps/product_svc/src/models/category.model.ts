@@ -6,7 +6,7 @@ export class Category extends Entity {
     type: 'string',
     id: true,
     generated: true,
-    mongodb: {dataType: 'ObjectID'}
+    mongodb: {dataType: 'ObjectID'},
   })
   id?: string;
 
@@ -15,7 +15,6 @@ export class Category extends Entity {
     required: true,
   })
   name: string;
-
 
   constructor(data?: Partial<Category>) {
     super(data);

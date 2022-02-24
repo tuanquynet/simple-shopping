@@ -8,9 +8,7 @@ export class BranchRepository extends DefaultCrudRepository<
   typeof Branch.prototype.id,
   BranchRelations
 > {
-  constructor(
-    @inject('datasources.mongodb') dataSource: MongodbDataSource,
-  ) {
+  constructor(@inject('datasources.mongodb') dataSource: MongodbDataSource) {
     super(Branch, dataSource);
   }
 }
