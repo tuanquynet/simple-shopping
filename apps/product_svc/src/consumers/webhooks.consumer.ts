@@ -7,9 +7,7 @@ interface Message {
 }
 
 export class WebhooksConsumer {
-  constructor() {
-    console.log('WebhooksConsumer');
-  }
+  constructor() {}
 
   @rabbitConsume({
     exchange: 'messaging.direct',
@@ -18,6 +16,5 @@ export class WebhooksConsumer {
   })
   async handle(message: Message, rawMessage: ConsumeMessage) {
     console.log('WebhooksConsumer: ', message);
-    console.log('WebhooksConsumer:raw: ', rawMessage);
   }
 }
