@@ -14,8 +14,8 @@ import {AccessLogRepository} from '../repositories';
 export class AccessLogConsumer {
   constructor(
     @repository(AccessLogRepository)
-    private accessLogRepository : AccessLogRepository,
-  ){
+    private accessLogRepository: AccessLogRepository,
+  ) {
     console.log('AccessLogConsumer');
   }
 
@@ -27,10 +27,9 @@ export class AccessLogConsumer {
   async handle(message: AccessLog) {
     console.log('AccessLogConsumer 123: ', message);
     try {
-      await this.accessLogRepository.create(message)
+      await this.accessLogRepository.create(message);
     } catch (error) {
       console.error(error);
     }
-
   }
 }

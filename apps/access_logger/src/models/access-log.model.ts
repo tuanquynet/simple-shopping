@@ -38,7 +38,6 @@ export class AccessLog extends Entity {
   })
   payload?: object;
 
-
   constructor(data?: Partial<AccessLog>) {
     super(data);
   }

@@ -8,9 +8,7 @@ export class AccessLogRepository extends DefaultCrudRepository<
   typeof AccessLog.prototype.id,
   AccessLogRelations
 > {
-  constructor(
-    @inject('datasources.mongodb') dataSource: MongodbDataSource,
-  ) {
+  constructor(@inject('datasources.mongodb') dataSource: MongodbDataSource) {
     super(AccessLog, dataSource);
   }
 }
