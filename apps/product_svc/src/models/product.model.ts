@@ -1,4 +1,6 @@
-import {Entity, model, property} from '@loopback/repository';
+import {belongsTo, Entity, model, property} from '@loopback/repository';
+import {Branch, BranchWithRelations} from './branch.model';
+import {Category, CategoryWithRelations} from './category.model';
 
 @model()
 export class Product extends Entity {
@@ -6,6 +8,7 @@ export class Product extends Entity {
     type: 'string',
     id: true,
     generated: true,
+    mongodb: {dataType: 'ObjectID'}
   })
   id?: string;
 
@@ -23,23 +26,11 @@ export class Product extends Entity {
     type: 'string',
     default: null,
     jsonSchema: {
-      pattern: '#[1-9A-F]{6}$',
+      pattern: '#[0-9A-F]{6}$',
       errorMessage: 'Invalid color.',
     },
   })
   color?: string;
-
-  @property({
-    type: 'string',
-    required: true,
-  })
-  branchId: string;
-
-  @property({
-    type: 'string',
-    required: true,
-  })
-  categoryId: string;
 
   @property({
     type: 'number',
@@ -53,6 +44,11 @@ export class Product extends Entity {
   })
   deleted?: boolean;
 
+  @belongsTo(() => Category)
+  categoryId: string;
+
+  @belongsTo(() => Branch)
+  branchId: string;
 
   constructor(data?: Partial<Product>) {
     super(data);
@@ -61,6 +57,8 @@ export class Product extends Entity {
 
 export interface ProductRelations {
   // describe navigational properties here
+  category?: CategoryWithRelations;
+  branch?: BranchWithRelations;
 }
 
 export type ProductWithRelations = Product & ProductRelations;
