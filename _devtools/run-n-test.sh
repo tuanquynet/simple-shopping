@@ -18,7 +18,7 @@ PROJECT=simple-shopping
 docker-compose -p $PROJECT -f ./docker-compose-test.yml up -d
 
 # echo 'We need to wait for 30s before running test case'
-sleep 30
+sleep 15
 
 RABBITMQ_CONTAINER_ID=$(echo $PROJECT)_rabbitmq_1
 docker exec -ti $RABBITMQ_CONTAINER_ID rabbitmqctl add_user admin admin

@@ -52,7 +52,20 @@ services:
       - RABBITMQ_PASS
 
     # command: "sleep 300"
-
+  access_logger:
+    build: ./apps/access_logger
+    restart: always
+    networks:
+      - shopping_net
+    environment:
+      - MONGO_HOST
+      - MONGO_PORT
+      - MONGO_USER
+      - MONGO_PASS
+      - RABBITMQ_HOST
+      - RABBITMQ_PROTOCOL
+      - RABBITMQ_USER
+      - RABBITMQ_PASS
 networks:
   shopping_net:
     driver: bridge

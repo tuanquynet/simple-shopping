@@ -1,4 +1,4 @@
-export DOCKER_HOST=ssh://ubuntu@192.168.1.98
+# export DOCKER_HOST=ssh://ubuntu@192.168.1.98
 
 export MONGO_INITDB_ROOT_USERNAME=admin
 export MONGO_INITDB_ROOT_PASSWORD=admin123
