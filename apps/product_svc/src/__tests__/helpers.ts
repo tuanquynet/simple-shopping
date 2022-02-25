@@ -4,7 +4,7 @@ import {Product} from '../models';
  * Generate a complete Todo object for use with tests.
  * @param todo - A partial (or complete) Todo object.
  */
- export function givenProduct(product?: Partial<Product>) {
+export function givenProduct(product?: Partial<Product>) {
   const data = Object.assign(
     {
       name: 'do a thing',
@@ -18,6 +18,8 @@ import {Product} from '../models';
   return new Product(data);
 }
 
-export function givenProductWithoutId(product?: Partial<Product>): Omit<Product, 'id'> {
+export function givenProductWithoutId(
+  product?: Partial<Product>,
+): Omit<Product, 'id'> {
   return givenProduct(product);
 }

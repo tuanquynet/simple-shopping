@@ -2,7 +2,7 @@ import {Client, expect} from '@loopback/testlab';
 import {ProductSvcApplication} from '../..';
 import {setupApplication} from './test-helper';
 
-xdescribe('Product API', () => {
+describe('Product API', () => {
   let app: ProductSvcApplication;
   let client: Client;
 

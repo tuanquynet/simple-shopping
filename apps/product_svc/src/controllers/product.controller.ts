@@ -4,7 +4,7 @@ import {
   Filter,
   FilterExcludingWhere,
   repository,
-  Where
+  Where,
 } from '@loopback/repository';
 import {
   del,
@@ -13,8 +13,9 @@ import {
   param,
   patch,
   post,
-  put, requestBody,
-  response
+  put,
+  requestBody,
+  response,
 } from '@loopback/rest';
 import {Product} from '../models';
 import {ProductRepository} from '../repositories';
@@ -24,8 +25,8 @@ export class ProductController {
   constructor(
     @repository(ProductRepository)
     public productRepository: ProductRepository,
-    // @inject(RestBindings.Http.REQUEST) private request: Request,
-  ) {}
+  ) // @inject(RestBindings.Http.REQUEST) private request: Request,
+  {}
 
   @post('/products')
   @response(200, {

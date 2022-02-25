@@ -2,7 +2,7 @@ import {
   createStubInstance,
   expect,
   sinon,
-  StubbedInstanceWithSinonAccessor
+  StubbedInstanceWithSinonAccessor,
 } from '@loopback/testlab';
 import {ProductController} from '../../../controllers';
 import {Product} from '../../../models';
@@ -36,9 +36,7 @@ describe('ProductController', () => {
       const findById = productRepo.stubs.findById;
       findById.resolves(aProductWithId);
       const result = await controller.findById(aProductWithId.id as string);
-      expect(result).to.eql(
-        aProductWithId,
-      );
+      expect(result).to.eql(aProductWithId);
       sinon.assert.calledWith(findById, aProductWithId.id);
     });
   });
@@ -64,7 +62,10 @@ describe('ProductController', () => {
     it('successfully replaces existing items', async () => {
       const replaceById = productRepo.stubs.replaceById;
       replaceById.resolves();
-      await controller.replaceById(aProductWithId.id as string, aChangedProduct);
+      await controller.replaceById(
+        aProductWithId.id as string,
+        aChangedProduct,
+      );
       sinon.assert.calledWith(replaceById, aProductWithId.id, aChangedProduct);
     });
   });
