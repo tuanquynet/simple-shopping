@@ -14,7 +14,7 @@ describe('Product API', () => {
     await app.stop();
   });
 
-  xit('Create a new product', async () => {
+  it('Create a new product', async () => {
     await client
       .post('/products')
       .send({
@@ -29,7 +29,7 @@ describe('Product API', () => {
       .expect(200);
   });
 
-  xit('Update a product', async () => {
+  it('Update a product', async () => {
     const givenProduct = {
       name: 'p02',
       branchId: '6217163b43cdc079a9d40554',
@@ -59,7 +59,7 @@ describe('Product API', () => {
     expect(response2.body.name).equal('newname');
   });
 
-  xit('Delete a product', async () => {
+  it('Delete a product', async () => {
     const givenProduct = {
       name: 'p03',
       branchId: '6217163b43cdc079a9d40554',
@@ -84,7 +84,7 @@ describe('Product API', () => {
       .expect(404);
   });
 
-  xit('Get a product', async () => {
+  it('Get a product', async () => {
     const givenProduct = {
       name: 'p02',
       branchId: '6217163b43cdc079a9d40554',
