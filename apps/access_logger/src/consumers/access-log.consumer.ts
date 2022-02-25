@@ -25,7 +25,6 @@ export class AccessLogConsumer {
     queue: 'access-log-queue',
   })
   async handle(message: AccessLog) {
-    console.log('AccessLogConsumer 123: ', message);
     try {
       await this.accessLogRepository.create(message);
     } catch (error) {

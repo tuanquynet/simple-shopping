@@ -31,7 +31,6 @@ export class AccessLoggerHandlerMiddlewareProvider
     ) => {
       const {request} = ctx;
       try {
-        // console.log('AccessLoggerHandlerMiddlewareProvider');
         const messageData = {
           serviceName: 'product_svc',
           createdAt: new Date(),

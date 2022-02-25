@@ -38,13 +38,6 @@ export class AccessLoggerApplication extends BootMixin(
     });
     this.component(RestExplorerComponent);
 
-    console.log(
-      'process.env.RABBITMQ_PROTOCOL',
-      process.env.RABBITMQ_PROTOCOL,
-      process.env.RABBITMQ_USER,
-      process.env.RABBITMQ_PASS,
-    );
-
     this.configure<RabbitmqComponentConfig>(RabbitmqBindings.COMPONENT).to({
       options: {
         protocol: process.env.RABBITMQ_PROTOCOL ?? 'amqp',
