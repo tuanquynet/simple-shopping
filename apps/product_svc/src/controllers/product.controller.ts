@@ -24,9 +24,8 @@ const MAX_RECORDS = 100;
 export class ProductController {
   constructor(
     @repository(ProductRepository)
-    public productRepository: ProductRepository,
-  ) // @inject(RestBindings.Http.REQUEST) private request: Request,
-  {}
+    public productRepository: ProductRepository, // @inject(RestBindings.Http.REQUEST) private request: Request,
+  ) {}
 
   @post('/products')
   @response(200, {
