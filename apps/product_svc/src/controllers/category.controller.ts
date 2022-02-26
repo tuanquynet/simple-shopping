@@ -37,12 +37,12 @@ export class CategoryController {
         'application/json': {
           schema: getModelSchemaRef(Category, {
             title: 'NewCategory',
-            exclude: ['id'],
+            // exclude: ['id'],
           }),
         },
       },
     })
-    category: Omit<Category, 'id'>,
+    category: Category,
   ): Promise<Category> {
     return this.categoryRepository.create(category);
   }

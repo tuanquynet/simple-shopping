@@ -5,7 +5,7 @@ export class Branch extends Entity {
   @property({
     type: 'string',
     id: true,
-    generated: true,
+    // generated: true,
     mongodb: {dataType: 'ObjectID'},
   })
   id?: string;

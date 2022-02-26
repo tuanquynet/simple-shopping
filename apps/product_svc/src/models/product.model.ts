@@ -7,7 +7,7 @@ export class Product extends Entity {
   @property({
     type: 'string',
     id: true,
-    generated: true,
+    // generated: true,
     mongodb: {dataType: 'ObjectID'},
   })
   id?: string;
@@ -25,10 +25,6 @@ export class Product extends Entity {
   @property({
     type: 'string',
     default: null,
-    jsonSchema: {
-      pattern: '#[0-9A-F]{6}$',
-      errorMessage: 'Invalid color.',
-    },
   })
   color?: string;
 

@@ -37,12 +37,12 @@ export class BranchController {
         'application/json': {
           schema: getModelSchemaRef(Branch, {
             title: 'NewBranch',
-            exclude: ['id'],
+            // exclude: ['id'],
           }),
         },
       },
     })
-    branch: Omit<Branch, 'id'>,
+    branch: Branch,
   ): Promise<Branch> {
     return this.branchRepository.create(branch);
   }
