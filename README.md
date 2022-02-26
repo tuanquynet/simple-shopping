@@ -1,9 +1,20 @@
 # simple-shopping
-it's just demo
+This is just a simple demo for demonstration concepts of microservices.
 
+## Setup development environment
+- Install docker. Please refer to https://docs.docker.com/engine/install/
+- Install docker compose. https://docs.docker.com/compose/install/
 
-## Setup rabbitmq
-for windows, please remove line 'NODENAME=rabbit@localhost' from rabbitmq/src/rabbimq-env.conf
-docker exec -ti <container-id> rabbitmqctl add_user admin admin
-docker exec -ti <container-id> rabbitmqctl set_user_tags admin administrator
-docker exec -ti <container-id> rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"s
+## Technical solution
+- Containerization with docker
+- API and Microservices Framework: Looback Framework. Please refer to https://loopback.io/
+- Database MongoDB
+- Messaging Rabbitmq
+
+## Test
+- open terminal and go to project folder
+- run: `bash _devtools/run-n-test.sh`
+
+* To clean up after test
+- `bash _devtools/clean-up-test-env.sh`
+
