@@ -16,4 +16,4 @@ export RABBITMQ_PORT=5672
 docker stop simple-shopping_product_svc_1
 docker rm simple-shopping_product_svc_1
 
-docker-compose -f ./docker-compose.yml up -d --build product_svc
+docker-compose -f ./docker-compose-dev.yml up -d --build product_svc

@@ -14,4 +14,4 @@ export RABBITMQ_PROTOCOL=amqp
 export RABBITMQ_PORT=5672
 
 
-docker-compose -f ./docker-compose.yml up -d
+docker-compose -f ./docker-compose-dev.yml up -d

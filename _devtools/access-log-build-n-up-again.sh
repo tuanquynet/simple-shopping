@@ -16,4 +16,4 @@ export RABBITMQ_PORT=5672
 docker stop simple-shopping_access_logger_1
 docker rm simple-shopping_access_logger_1
 
-docker-compose -f ./docker-compose.yml up -d --build access_logger
+docker-compose -f ./docker-compose-dev.yml up -d --build access_logger

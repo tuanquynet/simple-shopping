@@ -16,4 +16,4 @@ export RABBITMQ_PORT=5672
 docker stop simple-shopping_rabbitmq_1
 docker rm simple-shopping_rabbitmq_1
 
-docker-compose -f ./docker-compose.yml up -d --build rabbitmq
+docker-compose -f ./docker-compose-dev.yml up -d --build rabbitmq

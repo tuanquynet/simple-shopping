@@ -1,0 +1,94 @@
+version: '3.5'
+services:
+  rabbitmq:
+    build: ./other-services/rabbitmq
+    restart: always
+    networks:
+      - shopping_net
+    ports:
+      - "8883:8883"
+      - "1883:1883"
+      - "15672:15672"
+      - "5672:5672"
+      - "5671:5671"
+    expose:
+      - "15672"
+      - "5672"
+      - "5671"
+    environment:
+      CONFIG_USE_ECC: ""
+    volumes:
+      - "rabbitmq-data:/var/lib/rabbitmq"
+
+  mongodb:
+    build: ./other-services/mongodb
+    restart: always
+    networks:
+      - shopping_net
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD
+    volumes:
+      - "mongodb-data:/data/db"
+
+  product_svc:
+    image: sp-product_svc
+    build:
+      context: ./apps/product_svc
+      dockerfile: Dockerfile.local
+    restart: always
+    networks:
+      - shopping_net
+    depends_on:
+      - rabbitmq
+      - mongodb
+    ports:
+      - "3000:3000"
+      - "7000:9229"
+    environment:
+      - MONGO_HOST
+      - MONGO_PORT
+      - MONGO_USER
+      - MONGO_PASS
+      - RABBITMQ_HOST
+      - RABBITMQ_PROTOCOL
+      - RABBITMQ_USER
+      - RABBITMQ_PASS
+    volumes:
+      - "./apps/product_svc:/home/node/app"
+      - /home/node/app/node_modules
+
+    # command: "sleep 300"
+  access_logger:
+    image: sp-access_logger
+    build:
+      context: ./apps/access_logger
+      dockerfile: Dockerfile.local
+    restart: always
+    networks:
+      - shopping_net
+    depends_on:
+      - rabbitmq
+      - mongodb
+    environment:
+      - MONGO_HOST
+      - MONGO_PORT
+      - MONGO_USER
+      - MONGO_PASS
+      - RABBITMQ_HOST
+      - RABBITMQ_PROTOCOL
+      - RABBITMQ_USER
+      - RABBITMQ_PASS
+    volumes:
+      - "./apps/access_logger:/home/node/app"
+      - /home/node/app/node_modules
+networks:
+  shopping_net:
+    driver: bridge
+volumes:
+  rabbitmq-data:
+    driver: local
+  mongodb-data:
+    driver: local
