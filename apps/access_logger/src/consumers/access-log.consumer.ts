@@ -1,5 +1,5 @@
 import {repository} from '@loopback/repository';
-import {rabbitConsume} from 'loopback-rabbitmq';
+import {ConsumeMessage, Nack, rabbitConsume} from 'loopback-rabbitmq';
 import {AccessLog} from '../models';
 import {AccessLogRepository} from '../repositories';
 
@@ -24,11 +24,16 @@ export class AccessLogConsumer {
     routingKey: 'access-log',
     queue: 'access-log-queue',
   })
-  async handle(message: AccessLog) {
+  async handle(message: AccessLog, rawMessage: ConsumeMessage) {
     try {
       await this.accessLogRepository.create(message);
     } catch (error) {
       console.error(error);
+      // retry at least once.
+      if (rawMessage?.fields?.redelivered) {
+        return new Nack(false);
+      }
+      return new Nack(true);
     }
   }
 }

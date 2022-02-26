@@ -4,7 +4,7 @@ import {RepositoryMixin} from '@loopback/repository';
 import {RestApplication} from '@loopback/rest';
 import {
   RestExplorerBindings,
-  RestExplorerComponent,
+  RestExplorerComponent
 } from '@loopback/rest-explorer';
 import {ServiceMixin} from '@loopback/service-proxy';
 import {
@@ -13,7 +13,7 @@ import {
   QueueComponent,
   RabbitmqBindings,
   RabbitmqComponent,
-  RabbitmqComponentConfig,
+  RabbitmqComponentConfig
 } from 'loopback-rabbitmq';
 import path from 'path';
 import {MySequence} from './sequence';
@@ -58,7 +58,7 @@ export class AccessLoggerApplication extends BootMixin(
         retries: 0, // number of retries, 0 is forever
         interval: 1500, // retry interval in ms
       },
-      defaultConsumerErrorBehavior: MessageHandlerErrorBehavior.ACK,
+      defaultConsumerErrorBehavior: MessageHandlerErrorBehavior.NACK,
       prefetchCount: 10,
       exchanges: [
         {
