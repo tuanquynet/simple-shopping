@@ -4,7 +4,7 @@ import {RepositoryMixin} from '@loopback/repository';
 import {RestApplication} from '@loopback/rest';
 import {
   RestExplorerBindings,
-  RestExplorerComponent
+  RestExplorerComponent,
 } from '@loopback/rest-explorer';
 import {ServiceMixin} from '@loopback/service-proxy';
 import {
@@ -13,7 +13,7 @@ import {
   QueueComponent,
   RabbitmqBindings,
   RabbitmqComponent,
-  RabbitmqComponentConfig
+  RabbitmqComponentConfig,
 } from 'loopback-rabbitmq';
 import path from 'path';
 import {MySequence} from './sequence';
