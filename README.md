@@ -12,11 +12,16 @@ This is just a simple demo for demonstration concepts of microservices.
 - Messaging Rabbitmq
 
 ## Technical Design
-- Entity Relationship Diagram
+- Entity Relationship Diagram:
+
   ![ERD](/_docs/assets/erd-erd.jpg)
+
 - Flow of getting product detail:
+
   ![Product Detail](/_docs/assets/erd-get-product.jpg)
+
 - Flow of logging http request:
+
   ![Product Detail](/_docs/assets/erd-access-log.jpg)
 
 ## Test
